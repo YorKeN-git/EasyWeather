@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br><br>
+            <form [formGroup]="saisieVilleForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="" class="marge">Saisissez le nom d'une ville :</label>
+                    <input type="text" placeholder="Lille" formControlName="villeSaisie">
+                    <button type="submit" class="btn btn-primary" id="marge">Rechercher</button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="villeNonSaisie">
+                    Veuillez saisir une ville !
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
