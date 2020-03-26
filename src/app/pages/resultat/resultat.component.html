@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="background">
     <div class="row">
         <div class="col">
             <br><br>
@@ -15,16 +15,17 @@
         <div class="col">
             <div>
                 <!-- API Cartographie-->
+                <div id="mapid"></div>
             </div>
         </div>
         <div class="col">
             <!-- Information importante de la ville -->
-            <h4>Nom : {{maVille.location[1].name}}</h4>
-            <h4>Pays :</h4>
-            <h4>Région :</h4>
-            <h4>Latitude :</h4>
-            <h4>Longitude :</h4>
-            <h4>Date et heure locale :</h4>
+            <h4>Nom : {{maVIlleConvertJSON.location.name}}</h4>
+            <h4>Pays : {{maVIlleConvertJSON.location.country}}</h4>
+            <h4>Région : {{maVIlleConvertJSON.location.region}}</h4>
+            <h4>Latitude : {{maVIlleConvertJSON.location.lat}}</h4>
+            <h4>Longitude : {{maVIlleConvertJSON.location.lon}}</h4>
+            <h4>Date et heure locale : {{maVIlleConvertJSON.location.localtime}}</h4>
         </div>
     </div>
     <hr>
@@ -35,9 +36,9 @@
     </div>
     <div class="row">
         <div class="col">
-            <h4>Heure du relevé :</h4>
-            <h4>Température :</h4>
-            <h4>Temps :</h4>
+            <h4>Heure du relevé : {{maVIlleConvertJSON.current.observation_time}}</h4>
+            <h4>Température : {{maVIlleConvertJSON.current.temperature}}°C</h4>
+            <h4>Temps : {{maVIlleConvertJSON.current.weather_descriptions}} <img src="{{maVIlleConvertJSON.current.weather_icons}}" title="{{maVIlleConvertJSON.current.weather_descriptions}}"></h4>
         </div>
     </div>
     <hr>
@@ -48,16 +49,16 @@
     </div>
     <div class="row">
         <div class="col">
-            <h5>Vitesse du vent :</h5>
-            <h5>Angle du vent :</h5>
-            <h5>Direction du vent :</h5>
-            <h5>Pression :</h5>
-            <h5>Précipitation :</h5>
-            <h5>Humidité :</h5>
-            <h5>Couverture nuageuse :</h5>
-            <h5>Indice de confiance :</h5>
-            <h5>Indice UV :</h5>
-            <h5>Visibilité :</h5>
+            <h5>Vitesse du vent : {{maVIlleConvertJSON.current.wind_speed}}Kmh</h5>
+            <h5>Angle du vent : {{maVIlleConvertJSON.current.wind_degree}}°</h5>
+            <h5>Direction du vent : {{maVIlleConvertJSON.current.wind_dir}}</h5>
+            <h5>Pression : {{maVIlleConvertJSON.current.pressure}}</h5>
+            <h5>Précipitation : {{maVIlleConvertJSON.current.precip}}mm</h5>
+            <h5>Humidité : {{maVIlleConvertJSON.current.humidity}}%</h5>
+            <h5>Couverture nuageuse : {{maVIlleConvertJSON.current.cloudcover}}%</h5>
+            <h5>Température ressentit : {{maVIlleConvertJSON.current.feelslike}}°C</h5>
+            <h5>Indice UV : {{maVIlleConvertJSON.current.uv_index}}</h5>
+            <h5>Visibilité : {{maVIlleConvertJSON.current.visibility}}Km</h5>
         </div>
     </div>
     <hr>

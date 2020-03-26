@@ -26,13 +26,11 @@ export class VilleService {
     this.http.get(pathComplete).subscribe(data => {
       const response = data ;
       localStorage.setItem('villeRecup', JSON.stringify(response));
-      // this.ville = new Ville();
-      // this.ville.nom = '${data.location.name}';
-      // console.log(this.ville.nom);
+      //redirige vers la page resultat 
+      this.route.navigate(['/resultat']);
     });
     //Enregister en local storage la ville saisie 
     localStorage.setItem('ville', ville);
-    //redirige vers la page resultat 
-    this.route.navigate(['/resultat']);
+    
   }
 }
