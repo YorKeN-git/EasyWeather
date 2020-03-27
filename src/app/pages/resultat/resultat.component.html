@@ -3,6 +3,9 @@
         <div class="col">
             <br><br>
             <h3 class="titre">Résultat pour {{villeSaisie}} :</h3>
+            <div class="alert alert-danger" role="alert" *ngIf="erreurRequest">
+                Erreur lors de la requête, veuillez ré-essayer plus tard !
+            </div>
             <hr>
         </div>
     </div>

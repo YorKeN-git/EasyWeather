@@ -13,6 +13,7 @@ export class ResultatComponent implements OnInit {
   maVIlleConvertJSON: string;
   latitude: number; 
   longitude: number;
+  erreurRequest: boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -21,13 +22,22 @@ export class ResultatComponent implements OnInit {
     //Récuperd notre objet en local storage et convertit en JSON
     this.maVilleNonConvertJSON = localStorage.getItem('villeRecup');
     this.maVIlleConvertJSON = JSON.parse(this.maVilleNonConvertJSON);
-    this.latitude = Number.parseFloat(this.maVIlleConvertJSON.location.lat);
-    this.longitude = Number.parseFloat(this.maVIlleConvertJSON.location.lon);
+    console.log(this.maVIlleConvertJSON.success);
+    //MON WIP
+    if(this.maVIlleConvertJSON.success){
+      console.log("je suis false")
+      this.erreurRequest = true;
+    }else{
+      this.latitude = Number.parseFloat(this.maVIlleConvertJSON.location.lat);
+      this.longitude = Number.parseFloat(this.maVIlleConvertJSON.location.lon);
+      //Appel de notre méthode pour initialiser l'api Leaflet
+      this.initMap();
+      //Applique un background en fonction du moment JOUR/NUIT
+      this.afficherBackground();
+    }
     
-    //Appel de notre méthode pour initialiser l'api Leaflet
-    this.initMap();
-    //Applique un background en fonction du moment JOUR/NUIT
-    this.afficherBackground();
+    
+    
     }
 
     initMap(){
