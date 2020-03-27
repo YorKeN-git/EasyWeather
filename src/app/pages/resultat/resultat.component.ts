@@ -62,8 +62,8 @@ export class ResultatComponent implements OnInit {
 
     afficherBackground(){
       //Afficher un fond d'écran en fonction 
-      const monImage = this.maVIlleConvertJSON.current.weather_icons;
-      console.log(monImage);
+      const monImage = this.maVIlleConvertJSON.current.weather_icons[0];
+      //console.log(monImage);
       if(monImage.includes('night')){
         document.getElementById('background').style.backgroundColor = "#3C4A90";
       }else{
