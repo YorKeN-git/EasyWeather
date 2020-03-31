@@ -6,6 +6,9 @@
             <div class="alert alert-danger" role="alert" *ngIf="erreurRequest">
                 Erreur lors de la requête, veuillez ré-essayer plus tard !
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="erreurUsageLimite">
+                Nombre de requête mensuel atteinte !
+            </div>
             <hr>
         </div>
     </div>
