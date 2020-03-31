@@ -9,8 +9,8 @@ import * as L from 'leaflet';
 })
 export class ResultatComponent implements OnInit {
   villeSaisie: string; 
-  maVilleNonConvertJSON: string;
-  maVIlleConvertJSON: string;
+  maVilleNonConvertJSON: any;
+  maVIlleConvertJSON: any;
   latitude: number; 
   longitude: number;
   erreurRequest: boolean = false;
@@ -23,16 +23,17 @@ export class ResultatComponent implements OnInit {
     //Récuperd notre objet en local storage et convertit en JSON
     this.maVilleNonConvertJSON = localStorage.getItem('villeRecup');
     this.maVIlleConvertJSON = JSON.parse(this.maVilleNonConvertJSON);
-    //console.log(this.maVIlleConvertJSON.success);
-    //MON WIP
-    let error = this.maVIlleConvertJSON.error.code;
-    console.log(error);
-    if( error == '615'){
-      this.erreurRequest = true;
-    }else if(error == '104'){
-      //API free : limite a 100 requête par mois 
-      this.erreurUsageLimite = true;
+    if(this.maVIlleConvertJSON.error){
+      //Si il y a une erreur 
+      if( this.maVIlleConvertJSON.error.code == '104'){
+          //API free : limite a 1000 requête par mois 
+          this.erreurUsageLimite = true;
+      }else{
+        //Erreur lors de la requête
+        this.erreurRequest = true;
+      }
     }else{
+      //Pas d'erreur lors de la requête 
       this.erreurRequest = false;
       this.erreurUsageLimite = false;
       this.latitude = Number.parseFloat(this.maVIlleConvertJSON.location.lat);
@@ -42,6 +43,7 @@ export class ResultatComponent implements OnInit {
       //Applique un background en fonction du moment JOUR/NUIT
       this.afficherBackground();
     }
+  
   }
 
     initMap(){
@@ -77,7 +79,6 @@ export class ResultatComponent implements OnInit {
     afficherBackground(){
       //Afficher un fond d'écran en fonction 
       const monImage = this.maVIlleConvertJSON.current.weather_icons[0];
-      //console.log(monImage);
       if(monImage.includes('night')){
         document.getElementById('background').style.backgroundColor = "#3C4A90";
       }else{
