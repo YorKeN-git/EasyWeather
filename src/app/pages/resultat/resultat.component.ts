@@ -14,6 +14,7 @@ export class ResultatComponent implements OnInit {
   latitude: number; 
   longitude: number;
   erreurRequest: boolean = false;
+  erreurUsageLimite: boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -22,12 +23,18 @@ export class ResultatComponent implements OnInit {
     //Récuperd notre objet en local storage et convertit en JSON
     this.maVilleNonConvertJSON = localStorage.getItem('villeRecup');
     this.maVIlleConvertJSON = JSON.parse(this.maVilleNonConvertJSON);
-    console.log(this.maVIlleConvertJSON.success);
+    //console.log(this.maVIlleConvertJSON.success);
     //MON WIP
-    if(this.maVIlleConvertJSON.success){
-      console.log("je suis false")
+    let error = this.maVIlleConvertJSON.error.code;
+    console.log(error);
+    if( error == '615'){
       this.erreurRequest = true;
+    }else if(error == '104'){
+      //API free : limite a 100 requête par mois 
+      this.erreurUsageLimite = true;
     }else{
+      this.erreurRequest = false;
+      this.erreurUsageLimite = false;
       this.latitude = Number.parseFloat(this.maVIlleConvertJSON.location.lat);
       this.longitude = Number.parseFloat(this.maVIlleConvertJSON.location.lon);
       //Appel de notre méthode pour initialiser l'api Leaflet
@@ -35,10 +42,7 @@ export class ResultatComponent implements OnInit {
       //Applique un background en fonction du moment JOUR/NUIT
       this.afficherBackground();
     }
-    
-    
-    
-    }
+  }
 
     initMap(){
       //Initialisation de l'API
